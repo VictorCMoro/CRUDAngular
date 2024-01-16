@@ -1,0 +1,5 @@
+<div *ngFor="let jogo of jogos">
+    <h1>Nome: {{jogo.jogoNome}}</h1>
+    <h1>Ano: {{jogo.ano}}</h1>
+    <button (click)="deleteJogo(jogo)">Delete</button>
+</div>
