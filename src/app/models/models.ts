@@ -1,52 +1,38 @@
-export class Jogo{
-    JogoId: number
-    jogoNome = ""
+export class Livro{
+    livroId: number
+    livroNome = ""
     ano: number
-    Genero = ""
-    EmpresaId: number
-    JogoGeneros: JogosGenero[]
+    areaNome = ""
+    autor = ""
+    areaId: number
 
 
-    constructor(jogoId: number, ano: number, empresaId: number, jogoGeneros: JogosGenero[]){
-        this.JogoId = jogoId
+
+    constructor(LivroId: number, ano: number, areaId: number){
+        this.livroId = LivroId
         this.ano = ano
-        this.EmpresaId = empresaId
-        this.JogoGeneros = jogoGeneros
+        this.areaId = areaId }
+}
+
+export class AreaDeConhecimento{
+    areaId?: number
+    areaNome = ""
+    Livros: Livro[]
+
+    constructor(AreaId:number, livros: Livro[]){
+        this.areaId = AreaId
+        this.Livros = livros
     }
 }
 
-export class Empresa{
-    EmpresaId: number
-    Nome: string 
-    Jogos: Jogo[]
-
-    constructor(empresaId:number, nome:string, jogos: Jogo[]){
-        this.EmpresaId = empresaId
-        this.Nome = nome
-        this.Jogos = jogos
-    }
-}
-
-export class Genero{
-    GeneroId: number
+export class Autor{
+    AutorId: number
     Nome: string
 
-    constructor(generoId: number, nome: string){
-        this.GeneroId = generoId
+    constructor(AutorId: number, nome: string){
+        this.AutorId = AutorId
         this.Nome = nome
     }
 }
 
-export class JogosGenero{
-    JogoId: number;
-    Jogo: Jogo;
-    GeneroId: number;
-    Genero: Genero;
 
-    constructor(jogoId:number, jogo: Jogo, generoId: number, genero: Genero){
-        this.JogoId = jogoId
-        this.Jogo = jogo
-        this.GeneroId = generoId
-        this.Genero = genero
-    }
-}

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Empresa, Genero, Jogo } from './models/models';
-import { JogosListService } from './services/jogos-list.service';
+import { AreaDeConhecimento, Autor, Livro } from './models/models';
+import { livrariaListService } from './services/livraria-list.service';
 
 @Component({
   selector: 'app-root',
@@ -9,31 +9,21 @@ import { JogosListService } from './services/jogos-list.service';
 })
 export class AppComponent {
   title = 'Jogos.UI';
-  jogos: Jogo[] = []
-  empresas: Empresa[] = []
-  genero: Genero[] = []
+  livros: Livro[] = []
+  areaDeConhecimento: AreaDeConhecimento[] = []
+  autor: Autor[] = []
 
-  @Output() jogosUpdated = new EventEmitter<Jogo[]>();
+  @Output() livrosUpdated = new EventEmitter<Livro[]>();
 
-  constructor(private JogosListService: JogosListService){}
+  constructor(private LivrariaListService: livrariaListService){}
 
-  ngOnInit(): void{
-    this.JogosListService.getJogos().subscribe(
-      (result: Jogo[]) => {
-        
-        this.jogos = result;
-        console.log('Dados recebidos:', this.jogos);
-      }
-    );
-    
+
+  updateLivros(livros: Livro[]){
+    this.livros = livros;
   }
 
-  updateJogos(jogos: Jogo[]){
-    this.jogos = jogos;
-  }
-
-  deleteJogo(jogo: Jogo) {
-    this.JogosListService.deleteJogo(jogo.JogoId).subscribe((jogos: Jogo[]) => this.jogosUpdated.emit(jogos));
+  deleteLivro(livro: Livro) {
+    this.LivrariaListService.deleteLivro(livro).subscribe((livros: Livro[]) => this.livrosUpdated.emit(livros));
   }
 }
 

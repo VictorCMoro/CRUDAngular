@@ -1,5 +1,5 @@
-<div *ngFor="let jogo of jogos">
-    <h1>Nome: {{jogo.jogoNome}}</h1>
-    <h1>Ano: {{jogo.ano}}</h1>
-    <button (click)="deleteJogo(jogo)">Delete</button>
-</div>
+<nav style="margin: 0; padding: 0;">
+    <a routerLink="/list-livros">Livros</a>
+    <a routerLink="">Home</a>
+</nav>
+<router-outlet></router-outlet>
