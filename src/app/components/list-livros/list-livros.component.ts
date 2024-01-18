@@ -27,13 +27,13 @@ export class ListLivrosComponent {
     });
   }
 
-  editLivro(livro: Livro){
-    
-  }
 
   deleteLivro(livro: Livro) {
     this.LivrariaListService.deleteLivro(livro).subscribe(
-      (livros : Livro[]) => this.livrosUpdated.emit(livros))
-    this.loadLivros()
+      (livros: Livro[]) => {
+        this.livrosUpdated.emit(livros);
+        this.loadLivros();  
+      }
+    );
   }
 }

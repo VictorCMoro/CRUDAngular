@@ -1,24 +1,27 @@
 <div class="wrapper">
-    <h2>Cadastro de livros:</h2>
-    <form>
-      <label for="livroNome">Título do livro:</label>
-      <input [(ngModel)]="livro.livroNome" placeholder="Título" name="livroNome">
-  
-      <label for="ano">Ano:</label>
-      <input [(ngModel)]="livro.ano" type="number" placeholder="Ano" name="ano">
-  
-      <label for="autor">Autor:</label>
-      <input [(ngModel)]="livro.autor" placeholder="Autor" name="autor">
-  
-  
+  <h1>Cadastro de livros:</h1>
+  <form>
+    <label for="livroNome">Título do livro:</label>
+    <input
+      [(ngModel)]="livro.livroNome"
+      placeholder="Título"
+      name="livroNome"
+    />
+
+    <label for="ano">Ano:</label>
+    <input [(ngModel)]="livro.ano" type="number" placeholder="Ano" name="ano" />
+
+    <label for="autor">Autor:</label>
+    <input [(ngModel)]="livro.autor" placeholder="Autor" name="autor" />
+
+    <label for="areaId">Área de conhecimento: </label>
     <select [(ngModel)]="livro.areaId" name="areaId">
       <option>Select</option>
-      <option *ngFor='let v of areasDeConhecimento' [value]="v.areaId" >{{v.areaId}} {{ v.areaNome }}</option>
+      <option *ngFor="let v of areasDeConhecimento" [value]="v.areaId">
+        {{ v.areaId }} {{ v.areaNome }}
+      </option>
     </select>
-  
-      <button type="button" (click)="addLivro(livro)">Cadastrar Livro</button>
-    </form>
-  </div>
 
-  
-  
+    <button type="button" (click)="addLivro(livro)">Cadastrar Livro</button>
+  </form>
+</div>

@@ -17,21 +17,22 @@ export class Livro{
 export class AreaDeConhecimento{
     areaId?: number
     areaNome = ""
-    Livros: Livro[]
+    livros?: Livro[]
 
     constructor(AreaId:number, livros: Livro[]){
         this.areaId = AreaId
-        this.Livros = livros
+        this.livros = livros
     }
 }
 
 export class Autor{
-    AutorId: number
-    Nome: string
+    autorId: number
+    autorNome= ""
+    numeroLivros?: number
 
-    constructor(AutorId: number, nome: string){
-        this.AutorId = AutorId
-        this.Nome = nome
+    constructor(autorId: number, numeroLivros: number ){
+        this.autorId = autorId,
+        this.numeroLivros = numeroLivros
     }
 }
 

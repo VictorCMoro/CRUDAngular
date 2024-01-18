@@ -1,0 +1,23 @@
+<div class="wrapper">
+    <h2>ÁREAS: </h2>
+    <table >
+      <thead>
+        <tr>
+          <th>Área de conhecimento: </th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let autor of autores">
+          <td>Nome: {{ autor.autorNome}}</td>
+          <td>Número de livros: {{autor.numeroLivros}}</td>
+          <td>
+            <!-- <button class="deleteBtn" (click)="deleteLivro(livro)">Delete</button> -->
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+

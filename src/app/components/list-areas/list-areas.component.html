@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <h2>ÁREAS:</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Área de conhecimento:</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let area of areas">
+        <td>Nome: {{ area.areaNome }}</td>
+        <td>
+          <button class="details" routerLink="/list-areas/details">
+            Ver mais
+          </button>
+          <button class="delete" (click)="deleteArea(area)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <button class="addArea" routerLink="/list-areas/cadastrar">
+      Cadastrar área
+    </button>
+  </div>
+</div>
