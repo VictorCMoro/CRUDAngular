@@ -1,24 +1,25 @@
 <div class="wrapper">
-    <h2>Autores </h2>
-    <table >
-      <thead>
-        <tr>
-          <th>Autores: </th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let autor of autores">
-          <td>Nome: {{ autor.autorNome}}</td>
-          <td>Número de livros: {{autor.numeroLivros}}</td>
-          <td>
-            <button class="deleteBtn" (click)="deleteAutores(autor)">Delete</button>
-            
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div><button class="add">Adicionar autores</button></div>
-  </div>
+  <h2>Autores</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Autores:</th>
 
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let autor of autores">
+        <td>Nome: {{ autor.autorNome }}</td>
+
+        <td>
+          <button class="deleteBtn" (click)="deleteAutores(autor)">
+            Delete
+          </button>
+          <button class="editBtn" routerLink="/autor-list/edit-autores/:id" (click)="navigateToEditPage(autor.autorId)">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div><button class="add" routerLink="/autor-list/add-autor">Adicionar autores</button></div>
+</div>

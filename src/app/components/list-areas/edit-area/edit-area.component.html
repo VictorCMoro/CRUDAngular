@@ -1,0 +1,10 @@
+<div class="wrapper">
+    <h1>{{area.areaNome}}</h1>
+    <form >
+        <label for="areaNome">
+            Nome da área:
+        </label>
+        <input [(ngModel)]="area.areaNome" name="areaNome">
+        <button (click)="editArea(area)">Atualizar dados</button>
+    </form>
+</div>

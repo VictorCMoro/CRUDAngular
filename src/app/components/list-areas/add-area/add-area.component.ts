@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AreaDeConhecimento } from '../../models/models';
-import { AreasServiceService } from '../../services/areas-service.service';
+import { AreaDeConhecimento } from '../../../models/models';
+import { AreasServiceService } from '../../../services/areas-service.service';
 
 
 

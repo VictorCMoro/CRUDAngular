@@ -28,14 +28,7 @@ export class EditLivroComponent {
     this.getAreasDeConhecimento();
     this.getAutores();
     this.loadLivros();
-    this.route.params.subscribe(params => {
-      const livroId = +params['id'];
-      // Chame o serviço para obter o livro pelo ID
-      this.livrariaListService.getLivrosById(livroId).subscribe((livro: Livro) => {
-        // Agora você pode usar o livro retornado para preencher os campos do formulário
-        this.livro = livro;
-      });
-    });
+    this.getLivroById();
   }
 
   public getAutores(): void {
@@ -52,48 +45,63 @@ export class EditLivroComponent {
   } 
 
   public editLivro(livro: Livro): void {
-    livro.livroId = livro.livroId
-    console.log(livro.livroId)
-
-
-    const livroParaEditar = this.livros.find(l => l.livroId === livro.livroId);
-    console.log(livroParaEditar)
+    const livroParaEditar = this.livros.find(l => l.livroId === this.livro.livroId);
+  
     if (livroParaEditar) {
-        const areaIdSelecionada = +livro.areaId;
-        const area = this.areasDeConhecimento.find(a => a.areaId === areaIdSelecionada);
-
-        if (area) {
-            livroParaEditar.areaNome = area.areaNome;
-
-            const autorExistente = this.autores.find(a => a.autorNome === livro.autor);
-
-            if (!autorExistente) {
-                const novoAutor: Autor = {
-                    autorId: Math.floor(Math.random() * 101),
-                    autorNome: livro.autor,
-                };
-
-                console.log(novoAutor);
-
-                this.autoresService.addAutor(novoAutor).subscribe(() => {
-                    this.continuarEdicaoLivro(livroParaEditar);
-                });
-            } else {
-                this.continuarEdicaoLivro(livroParaEditar);
-            }
+      console.log('Livro encontrado para edição:', livroParaEditar);
+  
+      const areaIdSelecionada = +livro.areaId;
+      const autorIdSelecionado = +livro.autorId;
+      const area = this.areasDeConhecimento.find(a => a.areaId === areaIdSelecionada);
+      const autor = this.autores.find(a => a.autorId === autorIdSelecionado);
+  
+      if (area) {
+        livroParaEditar.areaNome = area.areaNome;
+        livroParaEditar.areaId = area.areaId;
+        livroParaEditar.livroNome = livro.livroNome;
+        livroParaEditar.ano = livro.ano;
+  
+        if (autor) {
+          livroParaEditar.autor = autor.autorNome;
+          livroParaEditar.autorId = autor.autorId;
+          this.continuarEdicaoLivro(livroParaEditar);
         } else {
-            console.error('Area not found for ID:', livro.areaId);
+          console.error('Autor não encontrado para ID:', livro.autorId);
         }
+      } else {
+        console.error('Área não encontrada para ID:', livro.areaId);
+      }
     } else {
-        console.error('Livro not found for ID:', livro.livroId);
+      console.error('Livro não encontrado para ID:', this.livro.livroId);
     }
-}
-
+  }
+  
+  
   private continuarEdicaoLivro(livro: Livro): void {
+    console.log('Continuando edição do livro:', livro);
+  
     this.livrariaListService.editLivro(livro).subscribe((livros: Livro[]) => {
+      console.log('Livro editado com sucesso. Novos livros:', livros);
       this.livrosUpdated.emit(livros);
     });
   }
+
+  public getLivroById(): void {
+    this.route.params.subscribe(params => {
+      const livroId = +params['id']; 
+  
+      console.log(livroId);
+  
+      if (!isNaN(livroId)) {
+        this.livrariaListService.getLivrosById(livroId).subscribe((livro: Livro) => {
+          this.livro = livro;
+        });
+      } else {
+        console.error('ID do livro inválido:', params['id']);
+      }
+    });
+  }
+  
 
   public getAreasDeConhecimento(): void {
     this.areasService.getAllAreas().subscribe((areas) => {

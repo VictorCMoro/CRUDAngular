@@ -30,7 +30,7 @@ export class ListLivrosComponent {
   }
 
   navigateToEditPage(livroId: number): void {
-    this.router.navigate(['/livros/edit', livroId]);
+    this.router.navigate(['/list-livros/edit-livro', livroId]);
   }
 
 

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { AreaDeConhecimento } from '../../models/models';
 import { livrariaListService } from '../../services/livraria-list.service';
 import { AreasServiceService } from '../../services/areas-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-areas',
@@ -11,7 +12,7 @@ import { AreasServiceService } from '../../services/areas-service.service';
 export class ListAreasComponent {
   areas: AreaDeConhecimento[] = []
   @Output() public areasUpdated = new EventEmitter<AreaDeConhecimento[]>();
-  constructor(private areasService: AreasServiceService){}
+  constructor(private areasService: AreasServiceService, private router: Router){}
 
   public ngOnInit(): void {
     this.getAreasDeConhecimento();
@@ -40,6 +41,9 @@ export class ListAreasComponent {
   }
 
 
+  navigateToEditPage(areaId: number): void {
+    this.router.navigate(['/list-areas/edit-area', areaId]);
+  }
   
   public showDetails(): void{
     

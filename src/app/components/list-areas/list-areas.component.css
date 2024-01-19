@@ -60,11 +60,18 @@ button {
 }
 
 .details {
-    background-color: #236ac8;
+    background-color: #23c891;
+    color: #fff;
+}
+
+.editBtn{
+    background-color: aqua;
+    color: #fff;
 }
 
 .delete{
     background-color: #dc3545;
+    color: #fff;
 }
 
 .addArea{

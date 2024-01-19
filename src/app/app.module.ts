@@ -10,9 +10,12 @@ import { FormsModule } from '@angular/forms';
 import { EditLivroComponent } from './components/edit-livro/edit-livro.component';
 import { ListAreasComponent } from './components/list-areas/list-areas.component';
 import { ListAutoresComponent } from './components/list-autores/list-autores.component';
-import { AreaDetailsComponent } from './components/area-details/area-details.component';
-import { AddAreaComponent } from './components/add-area/add-area.component';
-import { AddAutorComponent } from './components/add-autor/add-autor.component';
+import { AreaDetailsComponent } from './components/list-areas/area-details/area-details.component';
+import { AddAreaComponent } from './components/list-areas/add-area/add-area.component';
+import { AddAutorComponent } from './components/list-autores/add-autor/add-autor.component';
+import { EditAutoresComponent } from './components/list-autores/edit-autores/edit-autores.component';
+import { EditAreaComponent } from './components/list-areas/edit-area/edit-area.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { AddAutorComponent } from './components/add-autor/add-autor.component';
     ListAutoresComponent,
     AreaDetailsComponent,
     AddAreaComponent,
-    AddAutorComponent
+    AddAutorComponent,
+    EditAreaComponent,
+    EditAutoresComponent
   ],
   imports: [
     BrowserModule,

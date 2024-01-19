@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AreasServiceService } from '../../services/areas-service.service';
-import { AreaDeConhecimento, Livro } from '../../models/models';
-import { livrariaListService } from '../../services/livraria-list.service';
+import { AreasServiceService } from '../../../services/areas-service.service';
+import { AreaDeConhecimento, Livro } from '../../../models/models';
+import { livrariaListService } from '../../../services/livraria-list.service';
 
 @Component({
   selector: 'app-area-details',
@@ -29,6 +29,10 @@ export class AreaDetailsComponent implements OnInit {
         console.error('Erro ao obter áreas de conhecimento:', error);
       }
     );
+  }
+
+  public getNumeroLivro(area: AreaDeConhecimento) :number{
+    return area.livros ? area.livros.length : 1
   }
 
   getLivrosPorArea(areaDeConhecimento: AreaDeConhecimento): void {

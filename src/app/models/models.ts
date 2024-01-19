@@ -17,7 +17,7 @@ export class Livro{
 }
 
 export class AreaDeConhecimento{
-    areaId?: number
+    areaId: number
     areaNome = ""
     livros?: Livro[]
 

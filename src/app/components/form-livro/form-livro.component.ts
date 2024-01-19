@@ -36,7 +36,7 @@ export class FormLivroComponent {
   public addLivro(livro: Livro): void {
     livro.livroId = Math.floor(Math.random() * 101);
 
-    // console.log('livro.areaId:', livro.areaId); // Adicione esta linha
+    // console.log('livro.areaId:', livro.areaId); 
 
     const areaIdSelecionada = +livro.areaId;
     console.log(areaIdSelecionada);

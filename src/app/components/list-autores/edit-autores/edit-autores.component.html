@@ -1,0 +1,9 @@
+<div class="wrapper">
+    <h1>{{autor.autorNome}}</h1>
+    <form>
+        <label for="autorNome">Nome do autor</label>
+        <input [(ngModel)]="autor.autorNome" name="autorNome">
+        <button (click)="editAutor(autor)">Atualizar informações</button>
+    </form>
+    
+</div>

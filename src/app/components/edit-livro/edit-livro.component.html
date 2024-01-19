@@ -1,5 +1,5 @@
 <div class="wrapper" *ngIf="livro">
-  <h2>{{ livro.livroNome }}</h2>
+  <h1>{{ livro.livroNome }}</h1>
   <form>
     <label for="livroNome">Título do livro:</label>
     <input [(ngModel)]="livro.livroNome" placeholder="Título" name="livroNome" />
@@ -8,7 +8,11 @@
     <input [(ngModel)]="livro.ano" type="number" placeholder="Ano" name="ano" />
 
     <label for="autor">Autor:</label>
-    <input [(ngModel)]="livro.autor" placeholder="Autor" name="autor" />
+    <select [(ngModel)]="livro.autorId" name="autorId">
+      <option *ngFor="let a of autores" [value]="a.autorId">
+        {{a.autorId}} {{a.autorNome}}
+      </option>
+    </select>
 
     <label for="areaId">Área de Conhecimento:</label>
     <select [(ngModel)]="livro.areaId" name="areaId">

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Autor } from '../../models/models';
 import { AutoresService } from '../../services/autores.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-autores',
@@ -11,7 +12,7 @@ export class ListAutoresComponent {
   autores: Autor[] = []
   @Output() autorUpdated = new EventEmitter<Autor[]>()
 
-  constructor(private autorService: AutoresService){}
+  constructor(private autorService: AutoresService, private router: Router){}
 
   public ngOnInit(){
     this.getAutores();
@@ -22,7 +23,12 @@ export class ListAutoresComponent {
     this.autorService.getAutores().subscribe((autorLivro) => this.autores = autorLivro )
   }
 
+
+  navigateToEditPage(autorId: number): void {
+    this.router.navigate(['/autor-list/edit-autor', autorId]);
+  }
   
+
 
   deleteAutores(autor: Autor){
     this.autorService.deleteAutor(autor).subscribe((autores: Autor[]) => {

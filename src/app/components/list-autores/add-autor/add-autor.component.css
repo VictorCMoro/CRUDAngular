@@ -47,7 +47,6 @@ input {
     height: 25px;
     width: 190px;
     margin: 5px;
-    padding: 5px;
 }
 
 button:hover {
@@ -59,7 +58,4 @@ button:hover {
 select {
     background-color: #28231D;
     margin: 5px;
-    width: 190px;
-    border-radius: 5px;
-    height: 25px;
 }
