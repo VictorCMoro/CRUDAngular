@@ -1,9 +1,9 @@
 <div class="wrapper">
-    <h2>ÁREAS: </h2>
+    <h2>Autores </h2>
     <table >
       <thead>
         <tr>
-          <th>Área de conhecimento: </th>
+          <th>Autores: </th>
           <th></th>
           <th></th>
         </tr>
@@ -13,11 +13,12 @@
           <td>Nome: {{ autor.autorNome}}</td>
           <td>Número de livros: {{autor.numeroLivros}}</td>
           <td>
-            <!-- <button class="deleteBtn" (click)="deleteLivro(livro)">Delete</button> -->
+            <button class="deleteBtn" (click)="deleteAutores(autor)">Delete</button>
             
           </td>
         </tr>
       </tbody>
     </table>
+    <div><button class="add">Adicionar autores</button></div>
   </div>
 

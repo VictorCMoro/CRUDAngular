@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Autor } from '../../models/models';
 import { AutoresService } from '../../services/autores.service';
 
@@ -9,6 +9,7 @@ import { AutoresService } from '../../services/autores.service';
 })
 export class ListAutoresComponent {
   autores: Autor[] = []
+  @Output() autorUpdated = new EventEmitter<Autor[]>()
 
   constructor(private autorService: AutoresService){}
 
@@ -22,4 +23,11 @@ export class ListAutoresComponent {
   }
 
   
+
+  deleteAutores(autor: Autor){
+    this.autorService.deleteAutor(autor).subscribe((autores: Autor[]) => {
+      this.autorUpdated.emit(autores)
+      this.getAutores()
+    })
+  }
 }

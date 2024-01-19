@@ -1,12 +1,8 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="livro">
   <h2>{{ livro.livroNome }}</h2>
   <form>
     <label for="livroNome">Título do livro:</label>
-    <input
-      [(ngModel)]="livro.livroNome"
-      placeholder="Título"
-      name="livroNome"
-    />
+    <input [(ngModel)]="livro.livroNome" placeholder="Título" name="livroNome" />
 
     <label for="ano">Ano:</label>
     <input [(ngModel)]="livro.ano" type="number" placeholder="Ano" name="ano" />

@@ -3,13 +3,15 @@ export class Livro{
     livroNome = ""
     ano: number
     areaNome = ""
+    autorId: number
     autor = ""
     areaId: number
 
 
 
-    constructor(LivroId: number, ano: number, areaId: number){
+    constructor(LivroId: number, ano: number, areaId: number, AutorId: number){
         this.livroId = LivroId
+        this.autorId = AutorId
         this.ano = ano
         this.areaId = areaId }
 }

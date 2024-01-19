@@ -11,6 +11,7 @@ export class livrariaListService {
   private url = 'https://localhost:7198/api/Cadastro/GetAllLivros'
   private deleteUrl = 'https://localhost:7198/api/Cadastro'
   private editUrl = 'https://localhost:7198/api/Cadastro/EditLivro'
+  private livroByIdUrl = 'https://localhost:7198/api/Cadastro/GetLivroById'
   constructor(private http: HttpClient) { 
     
 
@@ -19,6 +20,11 @@ export class livrariaListService {
   public getLivros(): Observable<Livro[]>{
     return this.http.get<Livro[]>(this.url)
 
+  }
+
+  public getLivrosById(livroId: number):Observable<Livro>{
+    const getLivroByIdUrl = `${this.livroByIdUrl}/${livroId}`;
+    return this.http.get<Livro>(getLivroByIdUrl);
   }
 
   public deleteLivro(livro: Livro): Observable<Livro[]> {

@@ -18,9 +18,10 @@
         <td>Autor: {{ livro.autor }}</td>
         <td>
           <button class="deleteBtn" (click)="deleteLivro(livro)">Delete</button>
-          <button class="editBtn" routerLink="/list-livros/edit-livro">Edit</button>
+          <button class="editBtn" routerLink="/list-livros/edit-livro" (click)="editLivro(livro)">Edit</button>
         </td>
       </tr>
     </tbody>
   </table>
+  <div><button routerLink="" class="addArea">Cadastrar livros</button></div>
 </div>

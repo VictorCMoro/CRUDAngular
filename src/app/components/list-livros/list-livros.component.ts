@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Livro } from '../../models/models';
 import { livrariaListService } from '../../services/livraria-list.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-livros',
@@ -11,7 +12,8 @@ import { Observable } from 'rxjs';
 export class ListLivrosComponent {
   livros: Livro[] = [];
   @Output() public livrosUpdated = new EventEmitter<Livro[]>();
-  constructor(private LivrariaListService: livrariaListService) {}
+  @Output() public editLivrosClicked = new EventEmitter<Livro>()
+  constructor(private LivrariaListService: livrariaListService, private router: Router) {}
 
   ngOnInit(): void {
     this.LivrariaListService.getLivros().subscribe((result: Livro[]) => {
@@ -27,6 +29,10 @@ export class ListLivrosComponent {
     });
   }
 
+  navigateToEditPage(livroId: number): void {
+    this.router.navigate(['/livros/edit', livroId]);
+  }
+
 
   deleteLivro(livro: Livro) {
     this.LivrariaListService.deleteLivro(livro).subscribe(
@@ -35,5 +41,9 @@ export class ListLivrosComponent {
         this.loadLivros();  
       }
     );
+  }
+
+  editLivro(livro: Livro){
+    this.editLivrosClicked.emit(livro)
   }
 }

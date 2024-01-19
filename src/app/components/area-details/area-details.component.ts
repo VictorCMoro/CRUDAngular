@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AreasServiceService } from '../../services/areas-service.service';
 import { AreaDeConhecimento, Livro } from '../../models/models';
+import { livrariaListService } from '../../services/livraria-list.service';
 
 @Component({
   selector: 'app-area-details',
@@ -12,7 +13,7 @@ export class AreaDetailsComponent implements OnInit {
   areas: AreaDeConhecimento[] = [];
   areaSelecionada: AreaDeConhecimento | null = null; // Adicione uma propriedade para armazenar a área selecionada
 
-  constructor(private areasService: AreasServiceService) {}
+  constructor(private areasService: AreasServiceService, private livrariaService: livrariaListService) {}
 
   ngOnInit() {
     this.getAreasDeConhecimento();
@@ -31,9 +32,19 @@ export class AreaDetailsComponent implements OnInit {
   }
 
   getLivrosPorArea(areaDeConhecimento: AreaDeConhecimento): void {
-    this.areaSelecionada = areaDeConhecimento;
-    this.livros = areaDeConhecimento.livros || [];
-    this.getLivrosPorArea(this.areaSelecionada);
-    console.log(this.getLivrosPorArea)
+    this.areasService.getLivroPorArea(areaDeConhecimento).subscribe(
+      (livros: Livro[]) => {
+        this.livros = livros || [];
+        this.areaSelecionada = areaDeConhecimento;
+        console.log(this.livros);
+      },
+      error => {
+        console.error('Erro ao obter livros da área:', error);
+      }
+    );
   }
+  
+
+
+
 }

@@ -12,7 +12,11 @@
     <input [(ngModel)]="livro.ano" type="number" placeholder="Ano" name="ano" />
 
     <label for="autor">Autor:</label>
-    <input [(ngModel)]="livro.autor" placeholder="Autor" name="autor" />
+    <select [(ngModel)]="livro.autorId"  name="autorId">
+      <option *ngFor="let a of autores" [value]="a.autorId">
+        {{a.autorId}} {{a.autorNome}}
+      </option>
+    </select>
 
     <label for="areaId">Área de conhecimento: </label>
     <select [(ngModel)]="livro.areaId" name="areaId">

@@ -10,7 +10,7 @@ import { AutoresService } from '../../services/autores.service';
   styleUrls: ['./form-livro.component.css'],
 })
 export class FormLivroComponent {
-  @Input() public livro: Livro = new Livro(0, 0, 0);
+  @Input() public livro: Livro = new Livro(0, 0, 0, 0);
   @Output() public livrosUpdated = new EventEmitter<Livro[]>();
   public areasDeConhecimento!: AreaDeConhecimento[];
   public autores: Autor[] = [];
@@ -35,43 +35,37 @@ export class FormLivroComponent {
 
   public addLivro(livro: Livro): void {
     livro.livroId = Math.floor(Math.random() * 101);
-    
-    const area = this.areasDeConhecimento[livro.areaId];
+
+    // console.log('livro.areaId:', livro.areaId); // Adicione esta linha
+
+    const areaIdSelecionada = +livro.areaId;
+    console.log(areaIdSelecionada);
+    const area = this.areasDeConhecimento.find(
+      (a) => a.areaId === areaIdSelecionada
+    );
+    const autorIdSelecionado = +livro.autorId;
+    const autor = this.autores.find((a) => a.autorId === autorIdSelecionado);
+    console.log(autor);
+    console.log(area);
     if (area) {
       livro.areaNome = area.areaNome;
-  
-      // Verifique se o autor já está na lista de autores
-      const autorExistente = this.autores.find(a => a.autorNome === livro.autor);
-      if (!autorExistente) {
-        // Se não estiver, adicione ao banco de dados de autores
-        const novoAutor: Autor = {
-          autorId: Math.floor(Math.random() * 101),
-          autorNome: livro.autor,
-        };
 
-        console.log(novoAutor)
-        console.log(novoAutor.autorNome)
-        console.log(novoAutor.autorId)
-
-  
-        this.autoresService.addAutor(novoAutor).subscribe(() => {
-          // Após adicionar o autor, continue com a lógica da área
-          this.addLivroService.addLivro(livro).subscribe((livros: Livro[]) => {
-            this.livrosUpdated.emit(livros);
-          });
-        });
-      } else {
-        // Se o autor já existe, apenas continue com a lógica da área
-        this.addLivroService.addLivro(livro).subscribe((livros: Livro[]) => {
-          this.livrosUpdated.emit(livros);
-        });
+      if (autor) {
+        livro.autor = autor.autorNome;
       }
+
+      // const novoAutor: Autor = {
+      //   autorId: Math.floor(Math.random() * 101),
+      //   autorNome: livro.autor
+      // };
+
+      this.addLivroService.addLivro(livro).subscribe((livros: Livro[]) => {
+        this.livrosUpdated.emit(livros);
+      });
     } else {
-      console.error('Area not found for ID:', livro.areaId);
+      console.error('Area not found for ID:', areaIdSelecionada);
     }
   }
-  
-  
 
   public getAutores(): void {
     this.autoresService.getAutores().subscribe((autoresLivro) => {
@@ -79,10 +73,10 @@ export class FormLivroComponent {
     });
   }
 
-  public addAutor(autor: Autor): void{
+  public addAutor(autor: Autor): void {
     autor.autorId = Math.floor(Math.random() * 101);
     this.autoresService.addAutor(autor).subscribe((autoresLivro: Autor[]) => {
       this.autores = autoresLivro;
-    })
+    });
   }
 }

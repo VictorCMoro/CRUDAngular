@@ -12,6 +12,7 @@ import { ListAreasComponent } from './components/list-areas/list-areas.component
 import { ListAutoresComponent } from './components/list-autores/list-autores.component';
 import { AreaDetailsComponent } from './components/area-details/area-details.component';
 import { AddAreaComponent } from './components/add-area/add-area.component';
+import { AddAutorComponent } from './components/add-autor/add-autor.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AddAreaComponent } from './components/add-area/add-area.component';
     ListAreasComponent,
     ListAutoresComponent,
     AreaDetailsComponent,
-    AddAreaComponent
+    AddAreaComponent,
+    AddAutorComponent
   ],
   imports: [
     BrowserModule,

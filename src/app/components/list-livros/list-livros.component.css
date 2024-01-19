@@ -59,5 +59,10 @@
   
   .editBtn {
     background-color: #236ac8; 
+    color: #fff;
   }
   
+  .addArea{
+    color: #28231D;
+    background-color: lightgreen;
+}

@@ -1,29 +1,30 @@
 <div class="wrapper">
-    <h2>ÁREAS:</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Área de conhecimento</th>
-          <th>Livros</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let area of areas">
-          <td>{{ area.areaNome }}</td>
-          <td>
-            <button (click)="getLivrosPorArea(area)">Ver Livros</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <div *ngIf="areaSelecionada">
-      <h3>Livros da Área: {{ areaSelecionada.areaNome }}</h3>
-      <ul>
-        <li *ngFor="let livro of livros">
-          {{ livro.livroNome }} - {{ livro.autor }}
-        </li>
-      </ul>
-    </div>
+  <h2>ÁREAS:</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Área de conhecimento</th>
+        <th>Número de livros</th>
+        <th>Livros</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let area of areas">
+        <td>{{ area.areaNome }}</td>
+        <td>{{ getLivrosPorArea.length }}</td>
+        <td>
+          <button (click)="getLivrosPorArea(area)">Ver Livros</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="areaSelecionada">
+    <h3>Livros da Área: {{ areaSelecionada.areaNome }}</h3>
+    <ul>
+      <li *ngFor="let livro of livros">
+        {{ livro.livroNome }} - {{ livro.autor }}
+      </li>
+    </ul>
   </div>
-  
+</div>

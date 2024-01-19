@@ -39,6 +39,8 @@ export class ListAreasComponent {
     })
   }
 
+
+  
   public showDetails(): void{
     
   }
