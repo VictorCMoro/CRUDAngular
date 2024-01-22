@@ -6,34 +6,32 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-autores',
   templateUrl: './list-autores.component.html',
-  styleUrl: './list-autores.component.css'
+  styleUrl: './list-autores.component.css',
 })
 export class ListAutoresComponent {
-  autores: Autor[] = []
-  @Output() autorUpdated = new EventEmitter<Autor[]>()
+  autores: Autor[] = [];
+  @Output() autorUpdated = new EventEmitter<Autor[]>();
 
-  constructor(private autorService: AutoresService, private router: Router){}
+  constructor(private autorService: AutoresService, private router: Router) {}
 
-  public ngOnInit(){
+  public ngOnInit() {
     this.getAutores();
   }
 
-  
-  getAutores(){
-    this.autorService.getAutores().subscribe((autorLivro) => this.autores = autorLivro )
+  public getAutores() {
+    this.autorService
+      .getAutores()
+      .subscribe((autorLivro) => (this.autores = autorLivro));
   }
 
-
-  navigateToEditPage(autorId: number): void {
+  public navigateToEditPage(autorId: number): void {
     this.router.navigate(['/autor-list/edit-autor', autorId]);
   }
-  
 
-
-  deleteAutores(autor: Autor){
+  public deleteAutores(autor: Autor) {
     this.autorService.deleteAutor(autor).subscribe((autores: Autor[]) => {
-      this.autorUpdated.emit(autores)
-      this.getAutores()
-    })
+      this.autorUpdated.emit(autores);
+      this.getAutores();
+    });
   }
 }

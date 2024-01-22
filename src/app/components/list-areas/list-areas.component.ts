@@ -41,7 +41,7 @@ export class ListAreasComponent {
   }
 
 
-  navigateToEditPage(areaId: number): void {
+  public navigateToEditPage(areaId: number): void {
     this.router.navigate(['/list-areas/edit-area', areaId]);
   }
   

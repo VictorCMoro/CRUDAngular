@@ -19,7 +19,7 @@ export class EditAutoresComponent {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.route.params.pipe(
       switchMap(params => {
         const autorId = +params['id'];
@@ -31,12 +31,13 @@ export class EditAutoresComponent {
   }
 
   public editAutor(autor: Autor): void {
-    
+    if(!autor.autorNome){
+      alert('Preencha o nome do autor para editar.')
+      return
+    }
 
-    console.log('Autor encontrado para edição:', autor);
-
-    // Atualiza os dados necessários do autor
-    autor.autorNome = this.autor.autorNome;
+   
+    this.autor.autorNome = autor.autorNome;
 
     this.continuarEdicaoAutor(autor);
   }
@@ -45,7 +46,7 @@ export class EditAutoresComponent {
     console.log('Continuando edição do autor:', autor);
 
     this.autoresService.editAutor(autor).subscribe((autores: Autor) => {
-      console.log('Autor editado com sucesso. Novos autores:', autores);
+      alert('Autor editado com sucesso. ');
       this.autorUpdated.emit(autor);
     });
   }

@@ -17,29 +17,29 @@ export class AreasServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getAllAreas(): Observable<AreaDeConhecimento[]> {
+  public getAllAreas(): Observable<AreaDeConhecimento[]> {
     return this.http.get<AreaDeConhecimento[]>(this.url);
   }
 
-  addArea(area: AreaDeConhecimento): Observable<AreaDeConhecimento[]> {
+  public addArea(area: AreaDeConhecimento): Observable<AreaDeConhecimento[]> {
     return this.http.post<AreaDeConhecimento[]>(this.addAreaUrl, area);
   }
 
-  deleteArea(area: AreaDeConhecimento): Observable<AreaDeConhecimento[]> {
+  public deleteArea(area: AreaDeConhecimento): Observable<AreaDeConhecimento[]> {
     const deleteUrl = `${this.deleteUrl}/${area.areaId}`;
     return this.http.delete<AreaDeConhecimento[]>(deleteUrl);
   }
 
-  editArea(area: AreaDeConhecimento): Observable<AreaDeConhecimento[]> {
+  public editArea(area: AreaDeConhecimento): Observable<AreaDeConhecimento[]> {
     return this.http.put<AreaDeConhecimento[]>(this.editUrl, area);
   }
 
-  getAreaById(areaId: number): Observable<AreaDeConhecimento> {
+  public getAreaById(areaId: number): Observable<AreaDeConhecimento> {
     const url = `${this.areaByIdUrl}/${areaId}`;
     return this.http.get<AreaDeConhecimento>(url);
   }
 
-  getLivroPorArea(areaDeConhecimento: AreaDeConhecimento): Observable<Livro[]> {
+  public getLivroPorArea(areaDeConhecimento: AreaDeConhecimento): Observable<Livro[]> {
     const detailUrl = `${this.livroPorAreaUrl}/${areaDeConhecimento.areaId}`;
     return this.http.get<Livro[]>(detailUrl);
   }

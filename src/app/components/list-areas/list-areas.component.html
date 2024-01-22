@@ -11,7 +11,7 @@
       <tr *ngFor="let area of areas">
         <td>Nome: {{ area.areaNome }}</td>
         <td>
-          <button class="delete" (click)="deleteArea(area)">Delete</button>
+          <button class="deleteBtn" (click)="deleteArea(area)">Delete</button>
           <button class="editBtn" routerLink="/area-details/edit-area:id" (click)="navigateToEditPage(area.areaId)">Edit</button>
         </td>
       </tr>
@@ -19,7 +19,7 @@
   </table>
   <div>
     <button class="details" routerLink="/list-areas/details">Ver mais</button>
-    <button class="addArea" routerLink="/list-areas/cadastrar">
+    <button class="add" routerLink="/list-areas/cadastrar">
       Cadastrar área
     </button>
   </div>

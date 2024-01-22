@@ -14,9 +14,14 @@ export class AddAutorComponent {
 
   constructor(private autorService: AutoresService){}
 
-  addAutor(autor: Autor):void{
+  public addAutor(autor: Autor):void{
+    if(!autor.autorNome){
+      alert("Preencha o nome do autor para cadastrar.")
+      return
+    }
     autor.autorId = Math.floor(Math.random() * 101) 
 
-    this.autorService.addAutor(autor).subscribe((autores: Autor[]) => this.autoresUpdated.emit(autores))
+    this.autorService.addAutor(autor).subscribe((autores: Autor[]) => {this.autoresUpdated.emit(autores)
+    alert("Autor cadastrado com sucesso.")})
   }
 }

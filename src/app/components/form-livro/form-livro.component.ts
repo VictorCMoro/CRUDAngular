@@ -1,8 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { AreaDeConhecimento, Autor, Livro } from '../../models/models';
 import { AreasServiceService } from '../../services/areas-service.service';
 import { AddLivroService } from '../../services/add-livro.service';
 import { AutoresService } from '../../services/autores.service';
+
 
 @Component({
   selector: 'app-form-livro',
@@ -34,19 +42,22 @@ export class FormLivroComponent {
   }
 
   public addLivro(livro: Livro): void {
+    if (!livro.livroNome || !livro.ano || !livro.autorId || !livro.areaId ) {
+      alert('Por favor, preencha todos os campos antes de cadastrar o livro.');
+      return;
+    }
+
     livro.livroId = Math.floor(Math.random() * 101);
-
-    // console.log('livro.areaId:', livro.areaId); 
-
+    livro.imagem = livro.imagem;
+    console.log(livro.imagem);
     const areaIdSelecionada = +livro.areaId;
-    console.log(areaIdSelecionada);
+
     const area = this.areasDeConhecimento.find(
       (a) => a.areaId === areaIdSelecionada
     );
     const autorIdSelecionado = +livro.autorId;
     const autor = this.autores.find((a) => a.autorId === autorIdSelecionado);
-    console.log(autor);
-    console.log(area);
+
     if (area) {
       livro.areaNome = area.areaNome;
 
@@ -54,18 +65,16 @@ export class FormLivroComponent {
         livro.autor = autor.autorNome;
       }
 
-      // const novoAutor: Autor = {
-      //   autorId: Math.floor(Math.random() * 101),
-      //   autorNome: livro.autor
-      // };
-
       this.addLivroService.addLivro(livro).subscribe((livros: Livro[]) => {
-        this.livrosUpdated.emit(livros);
-      });
-    } else {
-      console.error('Area not found for ID:', areaIdSelecionada);
-    }
+      alert(`${livro.livroNome} cadastrado com sucesso`)
+      this.livrosUpdated.emit(livros);
+
+     
+    });
+  } else {
+    console.error('Area not found for ID:', areaIdSelecionada);
   }
+}
 
   public getAutores(): void {
     this.autoresService.getAutores().subscribe((autoresLivro) => {

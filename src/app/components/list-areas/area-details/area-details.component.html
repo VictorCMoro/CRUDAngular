@@ -21,10 +21,15 @@
 
   <div *ngIf="areaSelecionada">
     <h3>Livros da Área: {{ areaSelecionada.areaNome }}</h3>
-    <ul>
-      <li *ngFor="let livro of livros">
-        {{ livro.livroNome }} - {{ livro.autor }}
-      </li>
-    </ul>
+   
+      <div class="livro-card" *ngFor="let livro of livros">
+        <div class="livro-card-content">
+          <h4>{{ livro.livroNome }}</h4>
+          <img [src]="livro.imagem" alt="Capa" width="100" height="100">
+          <p>Autor: {{ livro.autor }}</p>
+          
+        </div>
+      
+    
   </div>
 </div>

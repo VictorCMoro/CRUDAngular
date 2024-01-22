@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ElementRef, NgModule, OnInit, ViewChild } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,7 +15,7 @@ import { AddAreaComponent } from './components/list-areas/add-area/add-area.comp
 import { AddAutorComponent } from './components/list-autores/add-autor/add-autor.component';
 import { EditAutoresComponent } from './components/list-autores/edit-autores/edit-autores.component';
 import { EditAreaComponent } from './components/list-areas/edit-area/edit-area.component';
-
+import * as LR from '@uploadcare/blocks'
 
 @NgModule({
   declarations: [
@@ -40,6 +40,13 @@ import { EditAreaComponent } from './components/list-areas/edit-area/edit-area.c
   providers: [
     provideClientHydration()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule { 
+ 
+
+
+ 
+}

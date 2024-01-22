@@ -25,7 +25,10 @@
         {{ v.areaId }} {{ v.areaNome }}
       </option>
     </select>
+    
+    <label for="imagem">Capa do livro: </label>
+    <input [(ngModel)]="livro.imagem" name="imagem">
 
-    <button type="button" (click)="addLivro(livro)">Cadastrar Livro</button>
+    <button type="button" class="add" (click)="addLivro(livro)">Cadastrar Livro</button>
   </form>
 </div>

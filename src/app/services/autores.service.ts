@@ -14,11 +14,11 @@ export class AutoresService {
   private autorByIdUrl = 'https://localhost:7198/api/Cadastro/GetAutorById'
   constructor(private http: HttpClient) { }
 
-  getAutores(): Observable<Autor[]>{
+  public getAutores(): Observable<Autor[]>{
     return this.http.get<Autor[]>(this.url)
   }
 
-  addAutor(autor: Autor): Observable<Autor[]>{
+  public addAutor(autor: Autor): Observable<Autor[]>{
     return this.http.post<Autor[]>(this.addUrl, autor)
   }
 
@@ -28,12 +28,12 @@ export class AutoresService {
     return this.http.get<Autor>(getAutorByIdUrl);
   }
 
-  editAutor(autor: Autor): Observable<Autor> {
+  public editAutor(autor: Autor): Observable<Autor> {
     return this.http.put<Autor>(this.editUrl, autor);
   }
 
 
-  deleteAutor(autor: Autor):Observable<Autor[]>{
+  public deleteAutor(autor: Autor):Observable<Autor[]>{
     const deleteUrl = `${this.removeUrl}/${autor.autorId}`
     return this.http.delete<Autor[]>(deleteUrl)
   }

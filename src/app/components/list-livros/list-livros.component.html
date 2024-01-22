@@ -3,6 +3,7 @@
   <table>
     <thead>
       <tr>
+        <th>Capa:</th>
         <th>Nome:</th>
         <th>Ano:</th>
         <th>Area de conhecimento:</th>
@@ -12,6 +13,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let livro of livros">
+        <td><img [src]="livro.imagem" alt="Capa" width="50" height="50"></td>
+        
         <td>Nome: {{ livro.livroNome }}</td>
         <td>Ano: {{ livro.ano }}</td>
         <td>Area de conhecimento: {{ livro.areaNome }}</td>
@@ -23,5 +26,5 @@
       </tr>
     </tbody>
   </table>
-  <div><button routerLink="" class="addArea">Cadastrar livros</button></div>
+  <div><button routerLink="" class="add">Cadastrar livros</button></div>
 </div>

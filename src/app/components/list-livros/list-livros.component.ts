@@ -3,6 +3,7 @@ import { Livro } from '../../models/models';
 import { livrariaListService } from '../../services/livraria-list.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AddLivroService } from '../../services/add-livro.service';
 
 @Component({
   selector: 'app-list-livros',
@@ -11,39 +12,42 @@ import { Router } from '@angular/router';
 })
 export class ListLivrosComponent {
   livros: Livro[] = [];
+  imagemRecebida: string = '';
   @Output() public livrosUpdated = new EventEmitter<Livro[]>();
-  @Output() public editLivrosClicked = new EventEmitter<Livro>()
-  constructor(private LivrariaListService: livrariaListService, private router: Router) {}
+  @Output() public editLivrosClicked = new EventEmitter<Livro>();
+  constructor(
+    private LivrariaListService: livrariaListService,
+    private router: Router,
+    private addService: AddLivroService
+  ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.LivrariaListService.getLivros().subscribe((result: Livro[]) => {
       this.livros = result;
       console.log('Dados recebidos:', this.livros);
     });
   }
 
-  loadLivros() {
+  public loadLivros() {
     this.LivrariaListService.getLivros().subscribe((result: Livro[]) => {
       this.livros = result;
       console.log('Dados recebidos:', this.livros);
+       
     });
   }
 
-  navigateToEditPage(livroId: number): void {
+  public navigateToEditPage(livroId: number): void {
     this.router.navigate(['/list-livros/edit-livro', livroId]);
   }
 
-
-  deleteLivro(livro: Livro) {
-    this.LivrariaListService.deleteLivro(livro).subscribe(
-      (livros: Livro[]) => {
-        this.livrosUpdated.emit(livros);
-        this.loadLivros();  
-      }
-    );
+  public deleteLivro(livro: Livro) {
+    this.LivrariaListService.deleteLivro(livro).subscribe((livros: Livro[]) => {
+      this.livrosUpdated.emit(livros);
+      this.loadLivros();
+    });
   }
 
-  editLivro(livro: Livro){
-    this.editLivrosClicked.emit(livro)
+  public editLivro(livro: Livro) {
+    this.editLivrosClicked.emit(livro);
   }
 }

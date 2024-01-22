@@ -3,7 +3,7 @@ import { AreaDeConhecimento, Autor, Livro } from '../../models/models';
 import { livrariaListService } from '../../services/livraria-list.service';
 import { AreasServiceService } from '../../services/areas-service.service';
 import { AutoresService } from '../../services/autores.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-edit-livro',
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './edit-livro.component.css',
 })
 export class EditLivroComponent {
-  livros: Livro[] = []
+  livros: Livro[] = [];
   @Input() livro: Livro = new Livro(0, 0, 0, 0);
   @Output() public livrosUpdated = new EventEmitter<Livro[]>();
   public areasDeConhecimento!: AreaDeConhecimento[];
@@ -24,7 +24,7 @@ export class EditLivroComponent {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.getAreasDeConhecimento();
     this.getAutores();
     this.loadLivros();
@@ -42,28 +42,37 @@ export class EditLivroComponent {
       this.livros = result;
       console.log('Dados recebidos:', this.livros);
     });
-  } 
+  }
 
   public editLivro(livro: Livro): void {
-    const livroParaEditar = this.livros.find(l => l.livroId === this.livro.livroId);
-  
+    if (!livro.livroNome || !livro.ano || !livro.autorId || !livro.areaId ) {
+      alert('Por favor, preencha todos os campos antes de atualizar o livro.');
+      return;
+    }
+    const livroParaEditar = this.livros.find(
+      (l) => l.livroId === this.livro.livroId
+    );
+
     if (livroParaEditar) {
       console.log('Livro encontrado para edição:', livroParaEditar);
-  
+
       const areaIdSelecionada = +livro.areaId;
       const autorIdSelecionado = +livro.autorId;
-      const area = this.areasDeConhecimento.find(a => a.areaId === areaIdSelecionada);
-      const autor = this.autores.find(a => a.autorId === autorIdSelecionado);
-  
+      const area = this.areasDeConhecimento.find(
+        (a) => a.areaId === areaIdSelecionada
+      );
+      const autor = this.autores.find((a) => a.autorId === autorIdSelecionado);
+
       if (area) {
         livroParaEditar.areaNome = area.areaNome;
         livroParaEditar.areaId = area.areaId;
         livroParaEditar.livroNome = livro.livroNome;
         livroParaEditar.ano = livro.ano;
-  
+        livroParaEditar.imagem = livro.imagem;
         if (autor) {
           livroParaEditar.autor = autor.autorNome;
           livroParaEditar.autorId = autor.autorId;
+          alert(`Livro ${livro.livroNome} atualizado`)
           this.continuarEdicaoLivro(livroParaEditar);
         } else {
           console.error('Autor não encontrado para ID:', livro.autorId);
@@ -75,11 +84,10 @@ export class EditLivroComponent {
       console.error('Livro não encontrado para ID:', this.livro.livroId);
     }
   }
-  
-  
+
   private continuarEdicaoLivro(livro: Livro): void {
     console.log('Continuando edição do livro:', livro);
-  
+
     this.livrariaListService.editLivro(livro).subscribe((livros: Livro[]) => {
       console.log('Livro editado com sucesso. Novos livros:', livros);
       this.livrosUpdated.emit(livros);
@@ -87,21 +95,22 @@ export class EditLivroComponent {
   }
 
   public getLivroById(): void {
-    this.route.params.subscribe(params => {
-      const livroId = +params['id']; 
-  
+    this.route.params.subscribe((params) => {
+      const livroId = +params['id'];
+
       console.log(livroId);
-  
+
       if (!isNaN(livroId)) {
-        this.livrariaListService.getLivrosById(livroId).subscribe((livro: Livro) => {
-          this.livro = livro;
-        });
+        this.livrariaListService
+          .getLivrosById(livroId)
+          .subscribe((livro: Livro) => {
+            this.livro = livro;
+          });
       } else {
         console.error('ID do livro inválido:', params['id']);
       }
     });
   }
-  
 
   public getAreasDeConhecimento(): void {
     this.areasService.getAllAreas().subscribe((areas) => {
