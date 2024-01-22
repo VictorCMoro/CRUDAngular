@@ -11,7 +11,7 @@ import { livrariaListService } from '../../../services/livraria-list.service';
 export class AreaDetailsComponent implements OnInit {
   livros: Livro[] = [];
   areas: AreaDeConhecimento[] = [];
-  areaSelecionada: AreaDeConhecimento | null = null; // Adicione uma propriedade para armazenar a área selecionada
+  areaSelecionada: AreaDeConhecimento | null = null; 
 
   constructor(
     private areasService: AreasServiceService,
@@ -34,9 +34,7 @@ export class AreaDetailsComponent implements OnInit {
     );
   }
 
-  public getNumeroLivro(area: AreaDeConhecimento): number {
-    return area.livros ? area.livros.length : 1;
-  }
+
 
   public getLivrosPorArea(areaDeConhecimento: AreaDeConhecimento): void {
     this.areasService.getLivroPorArea(areaDeConhecimento).subscribe(

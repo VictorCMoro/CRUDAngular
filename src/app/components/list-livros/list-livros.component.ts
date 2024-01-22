@@ -17,8 +17,7 @@ export class ListLivrosComponent {
   @Output() public editLivrosClicked = new EventEmitter<Livro>();
   constructor(
     private LivrariaListService: livrariaListService,
-    private router: Router,
-    private addService: AddLivroService
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
