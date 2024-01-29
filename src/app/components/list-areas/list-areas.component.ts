@@ -3,6 +3,7 @@ import { AreaDeConhecimento } from '../../models/models';
 import { livrariaListService } from '../../services/livraria-list.service';
 import { AreasServiceService } from '../../services/areas-service.service';
 import { Router } from '@angular/router';
+import { error } from 'node:console';
 
 @Component({
   selector: 'app-list-areas',
@@ -33,13 +34,21 @@ export class ListAreasComponent {
   }
 
 
-  public deleteArea(area: AreaDeConhecimento): void{
-    this.areasService.deleteArea(area).subscribe((areas: AreaDeConhecimento[]) => {
-      this.areasUpdated.emit(areas)
-      this.loadArea()
-    })
+  public deleteArea(area: AreaDeConhecimento): void {
+    this.areasService.deleteArea(area).subscribe(
+      (areas: AreaDeConhecimento[]) => {
+        this.areasUpdated.emit(areas);
+        this.loadArea();
+      },
+      (error) => {
+        if (error.status === 500) {
+          alert('Antes de excluir a área, é necessário deletar os livros associados.');
+        } else {
+          console.error('Erro ao excluir área:', error);
+        }
+      }
+    );
   }
-
 
   public navigateToEditPage(areaId: number): void {
     this.router.navigate(['/list-areas/edit-area', areaId]);
