@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Autor } from '../../models/models';
 import { AutoresService } from '../../services/autores.service';
 import { Router } from '@angular/router';
+import { error } from 'console';
 
 @Component({
   selector: 'app-list-autores',
@@ -32,6 +33,10 @@ export class ListAutoresComponent {
     this.autorService.deleteAutor(autor).subscribe((autores: Autor[]) => {
       this.autorUpdated.emit(autores);
       this.getAutores();
+    }, (error) => {
+      if(error.status === 500){
+        alert("Antes de excluir o autor, é necessário deletar os livros associados.")
+      }
     });
   }
 }
